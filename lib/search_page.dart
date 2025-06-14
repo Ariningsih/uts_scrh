@@ -1,66 +1,44 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
+import '../widgets/search_bar.dart';
 
 class SearchPage extends StatelessWidget {
   final List<Map<String, dynamic>> searchResults = [
     {
-      'title': "Hitman's Wife's Bodyguard",
-      'rating': 3.5,
-      'genres': "Comedy",
-      'description':
+      "title": "Hitman's Wife's Bodyguard",
+      "rating": 3.5,
+      "genres": "Comedy",
+      "description":
           "The world's most lethal odd couple bodyguard Michael Bryce and hitman Darius Kincaid are back on another mission."
     },
     {
-      'title': "Hitman's Wife's Bodyguard",
-      'rating': 4,
-      'genres': "Action",
-      'description':
+      "title": "Hitman's Wife's Bodyguard",
+      "rating": 4,
+      "genres": "Action",
+      "description":
           "The world's most lethal odd couple bodyguard Michael Bryce and hitman Darius Kincaid are back on another mission."
     },
   ];
+
+  SearchPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.yellow),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Text(
-          'Search',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                  hintText: 'Search',
-                  hintStyle: TextStyle(color: Colors.grey),
-                  filled: true,
-                  fillColor: Colors.grey[850],
-                  prefixIcon: Icon(Icons.search, color: Colors.grey),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  )),
-            ),
-            SizedBox(height: 16),
+            SizedBox(height: 20),
+            const SearchWidget(),
+            SizedBox(height: 20),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Search results (${searchResults.length})',
-                style: TextStyle(color: Colors.white70),
+                "Search results (${searchResults.length})",
+                style: const TextStyle(color: Colors.black87),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Expanded(
                 child: ListView.builder(
               itemCount: searchResults.length,
@@ -72,28 +50,40 @@ class SearchPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          width: 100,
-                          height: 140,
-                          color: Colors.grey[700],
+                          width: 130,
+                          height: 180,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: Colors.grey.shade300),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: const Offset(0, 3),
+                              )
+                            ]
+                          ),
                         ),
                         SizedBox(width: 16),
                         Expanded(
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                        Text(
-                              movie['title'],
-                              style: TextStyle(
-                                color: Colors.white,
+                            Text(
+                              movie["title"],
+                              style: const TextStyle(
+                                color: Colors.black87,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                               ),
                             ),
-                        SizedBox(height: 4),
-                        Row(
+                            SizedBox(height: 4),
+                            Row(
                               children: List.generate(5, (i) {
                                 return Icon(
-                                  i < movie['rating'].floor()
+                                  i < movie["rating"].floor()
                                       ? Icons.star
                                       : Icons.star_border,
                                   color: Colors.yellow,
@@ -101,27 +91,27 @@ class SearchPage extends StatelessWidget {
                                 );
                               }),
                             ),
-                        SizedBox(
+                            SizedBox(
                               height: 4,
                             ),
-                        Text(
-                              movie['genres'],
-                              style: TextStyle(color: Colors.white70),
+                            Text(
+                              movie["genres"],
+                              style: const TextStyle(color: Colors.black54),
                             ),
-                        SizedBox(
+                            SizedBox(
                               height: 4,
-                             ),
-                        Text(
-                              movie['description'],
-                              style: TextStyle(color: Colors.white54),
+                            ),
+                            Text(
+                              movie["description"],
+                              style: const TextStyle(color: Colors.black45),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                        )
+                            )
+                          ],
+                        ))
                       ],
-                    ))
-                  ],
-                ));
-               },
+                    ));
+              },
             ))
           ],
         ),
